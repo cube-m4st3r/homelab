@@ -1,0 +1,14 @@
+---
+# ansible-lint config for the homelab repo
+# "production" is the strictest built-in profile: aim high from day one.
+profile: production
+
+exclude_paths:
+  - .cache/
+  - .github/
+  - collections/
+  - docs/
+
+kinds:
+  - playbook: "playbooks/**/*.{yml,yaml}"
+  - yaml: "inventories/**/*.{yml,yaml}"
