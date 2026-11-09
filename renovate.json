@@ -1,0 +1,20 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["github>cube-m4st3r/.github:renovate-base"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "description": "Container images in inventory vars and the ansible-navigator config (tags like 'latest' are skipped)",
+      "managerFilePatterns": ["/^inventories/.+\\.ya?ml$/", "/^ansible-navigator\\.ya?ml$/"],
+      "matchStrings": ["image:\\s*[\"']?(?<depName>[^\\s:\"'@]+):(?<currentValue>[^\\s\"'@]+)"],
+      "datasourceTemplate": "docker"
+    }
+  ],
+  "packageRules": [
+    {
+      "description": "homelab is never released: the pinned collection, EE and app images are build(deps)",
+      "matchManagers": ["ansible-galaxy", "custom.regex"],
+      "semanticCommitType": "build"
+    }
+  ]
+}
